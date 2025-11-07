@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Stress Level Test</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('stress_test') }}">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Your Age</label>
+                        <input type="number" class="form-control" id="age" name="age" min="10" max="100" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="study_hours" class="form-label">Daily Study/Work Hours</label>
+                        <input type="number" class="form-control" id="study_hours" name="study_hours" min="0" max="24" required>
+                        <div class="form-text">How many hours do you spend studying or working each day?</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="sleep_hours" class="form-label">Daily Sleep Hours</label>
+                        <input type="number" class="form-control" id="sleep_hours" name="sleep_hours" min="0" max="24" required>
+                        <div class="form-text">How many hours do you sleep on average each night?</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="physical_activity" class="form-label">Physical Activity Level</label>
+                        <select class="form-select" id="physical_activity" name="physical_activity" required>
+                            <option value="" selected disabled>Select your activity level</option>
+                            <option value="1">1 - Minimal (mostly sedentary)</option>
+                            <option value="2">2 - Light (some walking)</option>
+                            <option value="3">3 - Moderate (regular exercise 1-3 times/week)</option>
+                            <option value="4">4 - High (regular exercise 4-5 times/week)</option>
+                            <option value="5">5 - Very High (daily intense exercise)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="social_support" class="form-label">Social Support Level</label>
+                        <select class="form-select" id="social_support" name="social_support" required>
+                            <option value="" selected disabled>Select your social support level</option>
+                            <option value="1">1 - Very Low (isolated)</option>
+                            <option value="2">2 - Low (limited support)</option>
+                            <option value="3">3 - Moderate (some regular social interaction)</option>
+                            <option value="4">4 - High (good social network)</option>
+                            <option value="5">5 - Very High (strong support system)</option>
+                        </select>
+                        <div class="form-text">How strong is your social support network?</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Calculate Stress Level</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

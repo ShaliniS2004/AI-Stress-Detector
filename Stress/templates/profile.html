@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>User Profile</h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 100px; height: 100px; font-size: 3rem;">
+                        {{ user['username'][0]|upper }}
+                    </div>
+                </div>
+                <h5 class="card-title text-center">{{ user['username'] }}</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Email:</strong> {{ user['email'] }}</li>
+                    {% if user['age'] %}
+                    <li class="list-group-item"><strong>Age:</strong> {{ user['age'] }}</li>
+                    {% endif %}
+                    <li class="list-group-item"><strong>Member since:</strong> {{ user['created_at'] }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Your Stress History</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="profileStressChart" width="400" height="200"></canvas>
+                <div class="mt-4">
+                    <h5>Stress Level Distribution</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Stress Level</th>
+                                <th>Count</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in stress_history %}
+                            <tr>
+                                <td>{{ record['stress_level'] }}</td>
+                                <td>{{ record['count'] }}</td>
+                                <td>{{ (record['count'] / stress_history|sum(attribute='count') * 100)|round(1) }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const profileCtx = document.getElementById('profileStressChart').getContext('2d');
+    const profileStressChart = new Chart(profileCtx, {
+        type: 'pie',
+        data: {
+            labels: {{ stress_history|map(attribute='stress_level')|list|tojson }},
+            datasets: [{
+                data: {{ stress_history|map(attribute='count')|list|tojson }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

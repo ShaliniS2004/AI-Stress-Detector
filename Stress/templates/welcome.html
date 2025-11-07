@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container welcome-container">
+    <div class="text-center mb-5">
+        <h1>Welcome, {{ username }}!</h1>
+        {% if stress_level %}
+        <div class="alert alert-{{ 'danger' if stress_level == 'High' else 'warning' if stress_level == 'Medium' else 'success' }} mt-3">
+            Your current stress level: <strong>{{ stress_level }}</strong>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-clipboard2-pulse display-4 mb-3"></i>
+                    <h3>Stress Checker</h3>
+                    <p>Take a quick test to assess your current stress level</p>
+                    <a href="{{ url_for('stress_test') }}" class="btn btn-primary">Check Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-emoji-smile display-4 mb-3"></i>
+                    <h3>Motivate Me</h3>
+                    <p>Get personalized recommendations based on your stress level</p>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-success">Get Motivated</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-heart-pulse display-4 mb-3"></i>
+                    <h3>Lower Stress</h3>
+                    <p>Techniques and activities to reduce your stress</p>
+                    <a href="{{ url_for('manage') }}" class="btn btn-info">Manage Stress</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if recommendations %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Your Personalized Recommendations</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Music to Listen</h5>
+                            <ul class="list-group">
+                                {% for song in recommendations.music %}
+                                <li class="list-group-item">
+                                    <i class="bi bi-music-note"></i> {{ song.title }} - {{ song.artist }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Motivational Quote</h5>
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>{{ recommendations.quotes[0] }}</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Quick Activities</h5>
+                            <ul class="list-group">
+                                {% for activity in recommendations.activities %}
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle"></i> {{ activity }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #6c757d;
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.avatar {
+    font-weight: bold;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.btn-primary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.form-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+canvas {
+    max-height: 400px;
+    width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+}/* Welcome page styles */
+.welcome-container {
+    padding: 2rem 0;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.bi {
+    color: #6c757d;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
